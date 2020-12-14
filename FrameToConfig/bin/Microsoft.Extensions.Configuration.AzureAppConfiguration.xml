@@ -1,0 +1,502 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Extensions.Configuration.AzureAppConfiguration</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Extensions.Configuration.AzureAppConfigurationExtensions">
+            <summary>
+            This type provides helper methods to make common use cases for Azure App Configuration easy.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfigurationExtensions.AddAzureAppConfiguration(Microsoft.Extensions.Configuration.IConfigurationBuilder,System.String,System.Boolean)">
+            <summary>
+            Adds key-value data from an Azure App Configuration store to a configuration builder.
+            </summary>
+            <param name="configurationBuilder">The configuration builder to add key-values to.</param>
+            <param name="connectionString">The connection string used to connect to the configuration store.</param>
+            <param name="optional">If true, this method will not throw an exception if the configuration store cannot be accessed.</param>
+            <returns>The provided configuration builder.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfigurationExtensions.AddAzureAppConfiguration(Microsoft.Extensions.Configuration.IConfigurationBuilder,System.Action{Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions},System.Boolean)">
+            <summary>
+            Adds key-value data from an Azure App Configuration store to a configuration builder.
+            </summary>
+            <param name="configurationBuilder">The configuration builder to add key-values to.</param>
+            <param name="action">A callback used to configure Azure App Configuration options.</param>
+            <param name="optional">If true, this method will not throw an exception if the configuration store cannot be accessed.</param>
+            <returns>The provided configuration builder.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfigurationExtensions.AddAzureAppConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds Azure App Configuration services to the specified <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add services to.</param>
+            <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> so that additional calls can be chained.</returns>
+        </member>
+        <member name="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationKeyVaultOptions">
+            <summary>
+            Options used to configure the client used to fetch key vault references in an Azure App Configuration provider.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationKeyVaultOptions.SetCredential(Azure.Core.TokenCredential)">
+            <summary>
+            Sets the credentials used to authenticate to key vaults that have no registered <see cref="T:Azure.Security.KeyVault.Secrets.SecretClient" />.
+            </summary>
+            <param name="credential">Default token credentials.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationKeyVaultOptions.Register(Azure.Security.KeyVault.Secrets.SecretClient)">
+            <summary>
+            Registers the specified <see cref="T:Azure.Security.KeyVault.Secrets.SecretClient" /> instance to use to resolve key vault references for secrets from associated key vault.
+            </summary>
+            <param name="secretClient">Secret client instance.</param>
+        </member>
+        <member name="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions">
+            <summary>
+            Options used to configure the behavior of an Azure App Configuration provider.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.ConnectionString">
+            <summary>
+            The connection string to use to connect to Azure App Configuration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.Endpoint">
+            <summary>
+            The endpoint of the Azure App Configuration.
+            If this property is set, the <see cref="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.Credential" /> property also needs to be set.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.Credential">
+            <summary>
+            The connection string to use to connect to Azure App Configuration.
+            If this property is set, the <see cref="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.Endpoint" /> property also needs to be set.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.KeyValueSelectors">
+            <summary>
+            A collection of <see cref="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.Models.KeyValueSelector" />.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.ChangeWatchers">
+            <summary>
+            A collection of <see cref="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.Models.KeyValueWatcher" />.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.MultiKeyWatchers">
+            <summary>
+            A collection of <see cref="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.Models.KeyValueWatcher" />.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.Adapters">
+            <summary>
+            A collection of <see cref="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.Models.KeyValueWatcher" />.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.KeyPrefixes">
+            <summary>
+            A collection of key prefixes to be trimmed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.OfflineCache">
+            <summary>
+            An offline cache provider which can be used to enable offline data retrieval and storage.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.Client">
+            <summary>
+            An optional client that can be used to communicate with Azure App Configuration. If provided, the connection string property will be ignored.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.ClientOptions">
+            <summary>
+            Options used to configure the client used to communicate with Azure App Configuration.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.Select(System.String,System.String)">
+            <summary>
+            Specify what key-values to include in the configuration provider.
+            <see cref="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.Select(System.String,System.String)" /> can be called multiple times to include multiple sets of key-values.
+            </summary>
+            <param name="keyFilter">
+            The key filter to apply when querying Azure App Configuration for key-values.
+            The characters asterisk (*), comma (,) and backslash (\) are reserved and must be escaped using a backslash (\).
+            Built-in key filter options: <see cref="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.KeyFilter" />.
+            </param>
+            <param name="labelFilter">
+            The label filter to apply when querying Azure App Configuration for key-values. By default the null label will be used. Built-in label filter options: <see cref="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.LabelFilter" />
+            The characters asterisk (*) and comma (,) are not supported. Backslash (\) character is reserved and must be escaped using another backslash (\).
+            </param>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.UseFeatureFlags(System.Action{Microsoft.Extensions.Configuration.AzureAppConfiguration.FeatureManagement.FeatureFlagOptions})">
+            <summary>
+            Enables Azure App Configuration feature flags to be parsed and transformed into feature management configuration.
+            </summary>
+            <param name="configure">A callback used to configure feature flag options.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.SetOfflineCache(Microsoft.Extensions.Configuration.AzureAppConfiguration.IOfflineCache)">
+            <summary>
+            Use an offline file cache to store Azure App Configuration data or retrieve previously stored data during offline periods.
+            </summary>
+            <param name="offlineCache">The offline file cache to use for storing/retrieving Azure App Configuration data.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.Connect(System.String)">
+            <summary>
+            Connect the provider to the Azure App Configuration service via a connection string.
+            </summary>
+            <param name="connectionString">
+            Used to authenticate with Azure App Configuration.
+            </param>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.Connect(System.Uri,Azure.Core.TokenCredential)">
+            <summary>
+            Connect the provider to Azure App Configuration using endpoint and token credentials.
+            </summary>
+            <param name="endpoint">The endpoint of the Azure App Configuration to connect to.</param>
+            <param name="credential">Token credentials to use to connect.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.TrimKeyPrefix(System.String)">
+            <summary>
+            Trims the provided prefix from the keys of all key-values retrieved from Azure App Configuration.
+            </summary>
+            <param name="prefix">The prefix to be trimmed.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.ConfigureClientOptions(System.Action{Azure.Data.AppConfiguration.ConfigurationClientOptions})">
+            <summary>
+            Configure the client used to communicate with Azure App Configuration.
+            </summary>
+            <param name="configure">A callback used to configure Azure App Configuration client options.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.ConfigureRefresh(System.Action{Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationRefreshOptions})">
+            <summary>
+            Configure refresh for key-values in the configuration provider.
+            </summary>
+            <param name="configure">A callback used to configure Azure App Configuration refresh options.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.GetRefresher">
+            <summary>
+            Get an instance of <see cref="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.IConfigurationRefresher" /> that can be used to trigger a refresh for the registered key-values.
+            </summary>
+            <returns>An instance of <see cref="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.IConfigurationRefresher" />.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.ConfigureKeyVault(System.Action{Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationKeyVaultOptions})">
+            <summary>
+            Configures the Azure App Configuration provider to use the provided Key Vault configuration to resolve key vault references.
+            </summary>
+            <param name="configure">A callback used to configure Azure App Configuration key vault options.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationProvider.Load">
+            <summary>
+            Loads (or reloads) the data for this provider.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationRefreshOptions">
+            <summary>
+            Options used to configure the refresh behavior of an Azure App Configuration provider.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationRefreshOptions.Register(System.String,System.Boolean)">
+            <summary>
+            Register the specified key-value to be refreshed when the configuration provider's <see cref="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.IConfigurationRefresher" /> triggers a refresh.
+            The <see cref="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.IConfigurationRefresher" /> instance can be obtained by calling <see cref="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.GetRefresher" />.
+            </summary>
+            <param name="key">Key of the key-value.</param>
+            <param name="refreshAll">If true, a change in the value of this key refreshes all key-values being used by the configuration provider.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationRefreshOptions.Register(System.String,System.String,System.Boolean)">
+            <summary>
+            Register the specified key-value to be refreshed when the configuration provider's <see cref="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.IConfigurationRefresher" /> triggers a refresh.
+            The <see cref="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.IConfigurationRefresher" /> instance can be obtained by calling <see cref="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions.GetRefresher" />.
+            </summary>
+            <param name="key">Key of the key-value.</param>
+            <param name="label">Label of the key-value.</param>
+            <param name="refreshAll">If true, a change in the value of this key refreshes all key-values being used by the configuration provider.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationRefreshOptions.SetCacheExpiration(System.TimeSpan)">
+            <summary>
+            Sets the cache expiration time for the key-values registered for refresh. Default value is 30 seconds. Must be greater than 1 second.
+            Any refresh operation triggered using <see cref="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.IConfigurationRefresher" /> will not update the value for a key until the cached value for that key has expired.
+            </summary>
+            <param name="cacheExpiration">Minimum time that must elapse before the cache is expired.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureKeyVault.AzureKeyVaultKeyValueAdapter.ProcessKeyValue(Azure.Data.AppConfiguration.ConfigurationSetting,System.Threading.CancellationToken)">
+            <summary> Uses the Azure Key Vault secret provider to resolve Key Vault references retrieved from Azure App Configuration. </summary>
+            <param KeyValue="IKeyValue">  inputs the IKeyValue </param>
+            returns the keyname and actual value
+        </member>
+        <member name="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.KeyVaultReferenceException">
+            <summary>
+            The exception that is thrown when there is an error resolving a reference to Azure Key Vault resource.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.KeyVaultReferenceException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the System.Exception class with a specified error
+            message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="inner">The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified.        /// </param>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.KeyVaultReferenceException.Message">
+             <summary>
+            Gets a message that describes the current exception.
+            Returns The error message that explains the reason for the exception, or an empty string("").
+             </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.KeyVaultReferenceException.Key">
+            <summary>
+            The key of the Key Vault reference that caused the exception.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.KeyVaultReferenceException.Label">
+            <summary>
+            The label of the Key Vault reference that caused the exception.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.KeyVaultReferenceException.Etag">
+            <summary>
+            The etag of the Key Vault reference that caused the exception.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.KeyVaultReferenceException.SecretIdentifier">
+            <summary>
+            The secret identifier used by the Azure Key Vault reference that caused the exception.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.KeyVaultReferenceException.ErrorCode">
+            <summary>
+            The error code, if available, describing the cause of the exception. 
+            </summary>
+        </member>
+        <member name="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.FeatureManagement.FeatureFlagOptions">
+            <summary>
+            Options used to configure the feature flags to be parsed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.FeatureManagement.FeatureFlagOptions.Label">
+            <summary>
+            The label that feature flags will be selected from.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.FeatureManagement.FeatureFlagOptions.CacheExpirationInterval">
+            <summary>
+            The time after which the cached values of the feature flags expire.  Must be greater than or equal to 1 second.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.IConfigurationRefresher">
+            <summary>
+            An interface used to trigger an update for the data registered for refresh with App Configuration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.IConfigurationRefresher.AppConfigurationEndpoint">
+            <summary>
+            The App Configuration endpoint.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.IConfigurationRefresher.RefreshAsync">
+            <summary>
+            Refreshes the data from App Configuration asynchronously.
+            </summary>
+            <exception cref="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.KeyVaultReferenceException">An error occurred when resolving a reference to an Azure Key Vault resource.</exception>
+            <exception cref="T:Azure.RequestFailedException">The request failed with an error code from the server.</exception>
+            <exception cref="T:System.AggregateException">
+            The refresh operation failed with one or more errors. Check <see cref="P:System.AggregateException.InnerExceptions" /> for more details.
+            </exception>
+            <exception cref="T:System.InvalidOperationException">The refresh operation was invoked before Azure App Configuration Provider was initialized.</exception>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.IConfigurationRefresher.TryRefreshAsync">
+            <summary>
+            Refreshes the data from App Configuration asynchronously. A return value indicates whether the operation succeeded.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.IConfigurationRefresher.SetDirty(System.Nullable{System.TimeSpan})">
+            <summary>
+            Sets the cached value for key-values registered for refresh as dirty.
+            A random delay is added before the cached value is marked as dirty to reduce potential throttling in case multiple instances refresh at the same time.
+            </summary>
+            <param name="maxDelay">Maximum delay before the cached value is marked as dirty. Default value is 30 seconds.</param>
+        </member>
+        <member name="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.IConfigurationRefresherProvider">
+            <summary>
+            An interface used to retrieve refresher instances for App Configuration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.IConfigurationRefresherProvider.Refreshers">
+            <summary>
+            List of instances of <see cref="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.IConfigurationRefresher" /> for App Configuration.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.IOfflineCache">
+            <summary>
+            Defines the necessary interface to perform offline caching of Azure App Configuration data.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.IOfflineCache.Import(Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions)">
+            <summary>
+            Import Azure App Configuration data according to the provided <see cref="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions" />.
+            </summary>
+            <param name="options">Options describing what data is being requested.</param>
+            <returns>Cached Azure App Configuration data.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.IOfflineCache.Export(Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions,System.String)">
+            <summary>
+            Export Azure App Configuration data to an offline cache.
+            </summary>
+            <param name="options">The options that were used to retrieve the Azure App Configuration data.</param>
+            <param name="data">The data to cache for later usage.</param>
+        </member>
+        <member name="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.KeyFilter">
+            <summary>
+            Defines well known key filters that are used within Azure App Configuration.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Extensions.Configuration.AzureAppConfiguration.KeyFilter.Any">
+            <summary>
+            The filter that matches key-values with any keys.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.LabelFilter">
+            <summary>
+            Defines well known label filters that are used within Azure App Configuration.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Extensions.Configuration.AzureAppConfiguration.LabelFilter.Null">
+            <summary>
+            The filter that matches key-values with a null label.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.Models.KeyValueSelector">
+            <summary>
+            A selector used to control what key-values are retrieved from Azure App Configuration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.Models.KeyValueSelector.KeyFilter">
+            <summary>
+            A filter that determines the set of keys that are included in the configuration provider.
+            </summary>
+            <remarks>See the documentation for this provider for details on the format of filter expressions</remarks>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.Models.KeyValueSelector.LabelFilter">
+            <summary>
+            A filter that determines what label to use when selecting key-values for the the configuration provider
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.Models.KeyValueWatcher.Key">
+            <summary>
+            Key of the key-value to be watched.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.Models.KeyValueWatcher.Label">
+            <summary>
+            Label of the key-value to be watched.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.Models.KeyValueWatcher.RefreshAll">
+            <summary>
+            A flag to refresh all key-values.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.Models.KeyValueWatcher.CacheExpirationInterval">
+            <summary>
+            The minimum time that must elapse before the key-value is refreshed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.Models.KeyValueWatcher.CacheExpires">
+            <summary>
+            The cache expiration time for the key-value.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.Models.KeyValueWatcher.Semaphore">
+            <summary>
+            Semaphore that can be used to prevent simultaneous refresh of the key-value from multiple threads.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.OfflineFileCache">
+            <summary>
+            An offline cache provider for Azure App Configuration that uses the file system to store data.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Extensions.Configuration.AzureAppConfiguration.OfflineFileCache.dataProp">
+            <summary>
+            Key name for cached data
+            </summary>
+        </member>
+        <member name="F:Microsoft.Extensions.Configuration.AzureAppConfiguration.OfflineFileCache.hashProp">
+            <summary>
+            Key name for signature
+            </summary>
+        </member>
+        <member name="F:Microsoft.Extensions.Configuration.AzureAppConfiguration.OfflineFileCache.scopeProp">
+            <summary>
+            Key name for cached data scope
+            </summary>
+        </member>
+        <member name="F:Microsoft.Extensions.Configuration.AzureAppConfiguration.OfflineFileCache._scopeToken">
+            <summary>
+            An opaque token representing a query for Azure App Configuration data.
+            The token is used to test if cached data matches the request being issued to Azure App Configuration.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.OfflineFileCache.#ctor(Microsoft.Extensions.Configuration.AzureAppConfiguration.OfflineFileCacheOptions)">
+            <summary>
+            A cache used for storing Azure App Configuration data using the file system.
+            Supports encryption of the stored data.
+            </summary>
+            <param name="options">
+            Options dictating the behavior of the offline cache.
+            If the options are null or the encryption keys are omitted, they will be derived from the store's connection string.
+            <see cref="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.OfflineFileCacheOptions.Path" /> is required unless the application is running inside of an Azure App Service instance, in which case it can be populated automatically.
+            </param>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.OfflineFileCache.Import(Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions)">
+            <summary>
+            An implementation of <see cref="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.IOfflineCache.Import(Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions)" /> that retrieves the cached data from the file system.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.OfflineFileCache.Export(Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions,System.String)">
+            <summary>
+            An implementation of <see cref="M:Microsoft.Extensions.Configuration.AzureAppConfiguration.IOfflineCache.Export(Microsoft.Extensions.Configuration.AzureAppConfiguration.AzureAppConfigurationOptions,System.String)" /> that caches the data in the file system.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.OfflineFileCacheOptions">
+            <summary>
+            Options for controlling the behavior of an <see cref="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.OfflineFileCache" />.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.OfflineFileCacheOptions.Path">
+            <summary>
+            The file path to use for persisting cached data.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.OfflineFileCacheOptions.Key">
+            <summary>
+            Key used for encrypting data stored in the offline file cache.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.OfflineFileCacheOptions.IV">
+            <summary>
+            Initilization vector used for encryption within the offline file cache.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.AzureAppConfiguration.OfflineFileCacheOptions.SignKey">
+            <summary>
+            Key used for signing data stored in the offline file cache.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Extensions.Configuration.AzureAppConfiguration.RequestType">
+            <summary>
+            Types of read requests.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Extensions.Configuration.AzureAppConfiguration.RequestType.Startup">
+            <summary>
+            Indicate read for app initialization/startup.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Extensions.Configuration.AzureAppConfiguration.RequestType.Watch">
+            <summary>
+            Indicate watch/observe type request.
+            </summary>
+        </member>
+    </members>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>ylaSO7VzsQ2GD9DoagXBrZ3p770=</DigestValue></Reference></SignedInfo><SignatureValue>soeE//sqWqaQEYtzL5Au2ZbZc3waApMdU7XS/Cb2Z9PPJs+yEaJ3+Bbg/AhEvKx14JEO/raj14O3tEv7pLLaGbCMxFi8P7ga7lhrw51tqvTWZJb9nValZO7Q7MfeOymnJ/z1B/bUA468WBQYCa4c6FnpEZv77yqC207SdxMSR4VmSRaffCT4KOn+NhNOBtpAFe+T2cDmGVB3sOLspJPBZs6Eo1vM/zVOh2v1MGUQLlQb1FPD/BhDSGsreyfbpQKHj/Z0CWBnIFavjo/r76U1EjpWLtpAyBhuos9iOOUMHe/J80T8ojqFx+xxcCRGvcaADWG/EJDc1YFIHFDtefvjjQ==</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>uPXssmmonoN12+3sPv4QN+IKs0bkXm/bLwRejd/oiw+QNIjHXbbp55mxVUPpTVqYX/8Thnn+b1zDDJO+OLcaP5E+giqtBs1fiIQKg8rYx91IBoSwTWf1FrkD4K54cGn0N2XJbF6NZbaOKcqbOPl90ckH58QsKrY0cYwkPgMCM5NL0lRZyHegMGwe98NpSfjAvhOp1Zsr4pKew09rMExdOSZHzFLcw6LJLc/6b7zFmNSFDme9V6llF3MH81gyfvelsQR+i6Q0NXwkNzzgN4wgbt5jIgdZErDIoR/nqtRMw9BLO4iE9TJShET0JgvsZSvvaTwMOo/qz9oLmHyqzBa9/Q==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>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</X509Certificate><X509Certificate>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</X509Certificate><X509Certificate>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</X509Certificate></X509Data></KeyInfo><Object Id="ts-countersig"><X509Data><X509Certificate>MIIE2jCCA8KgAwIBAgITMwAAAUcUokD4l/7qjgAAAAABRzANBgkqhkiG9w0BAQUFADB3MQswCQYDVQQGEwJVUzETMBEGA1UECBMKV2FzaGluZ3RvbjEQMA4GA1UEBxMHUmVkbW9uZDEeMBwGA1UEChMVTWljcm9zb2Z0IENvcnBvcmF0aW9uMSEwHwYDVQQDExhNaWNyb3NvZnQgVGltZS1TdGFtcCBQQ0EwHhcNMTkxMTEzMjE0MjE2WhcNMjEwMjExMjE0MjE2WjCByjELMAkGA1UEBhMCVVMxEzARBgNVBAgTCldhc2hpbmd0b24xEDAOBgNVBAcTB1JlZG1vbmQxHjAcBgNVBAoTFU1pY3Jvc29mdCBDb3Jwb3JhdGlvbjElMCMGA1UECxMcTWljcm9zb2Z0IEFtZXJpY2EgT3BlcmF0aW9uczEmMCQGA1UECxMdVGhhbGVzIFRTUyBFU046MTJCQy1FM0FFLTc0RUIxJTAjBgNVBAMTHE1pY3Jvc29mdCBUaW1lLVN0YW1wIFNlcnZpY2UwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDuxd/zFPj59g6n/cTQIN8R9CZxQubQNMKglsLkAHofB+0LUcYo1GojzCL8XuZUHMQ1NdxnPyY1FIK1s/sDaXLTJ9Nc+jY8hC8CIe3s+tnWBkCBnq6lCgiNAVuDWd/LCBdCJbKJmqh2SKV4w5APiTYUU6qHj4wQHCT9hhaGSYjT9OfK+zZ3fG7xE/esF54EsfbTMX9fjpr1vE3tT7eC90NZaLIL+iooU9jonsu/wNYu2EZSfDhiWM/InYrMFvwOcS+rpsmrVUUjz//vT2za1pJYRHwtK6HphVoFR1jBdYlo5anNbpLgtMA4KQFqhHMt6Ta9fCp+Ao1K7lz6GpSjtmG9AgMBAAGjggEJMIIBBTAdBgNVHQ4EFgQUMNAft7FcuExXsY5XOWARuwzriHowHwYDVR0jBBgwFoAUIzT42VJGcArtQPt2+7MrsMM1sw8wVAYDVR0fBE0wSzBJoEegRYZDaHR0cDovL2NybC5taWNyb3NvZnQuY29tL3BraS9jcmwvcHJvZHVjdHMvTWljcm9zb2Z0VGltZVN0YW1wUENBLmNybDBYBggrBgEFBQcBAQRMMEowSAYIKwYBBQUHMAKGPGh0dHA6Ly93d3cubWljcm9zb2Z0LmNvbS9wa2kvY2VydHMvTWljcm9zb2Z0VGltZVN0YW1wUENBLmNydDATBgNVHSUEDDAKBggrBgEFBQcDCDANBgkqhkiG9w0BAQUFAAOCAQEAQzXFllmbuA38QBIx878yhSOMUYqI6JeDwT3Jm6owT9bzvt1EoLhId0LV9FL6KNiSSCB1YpEQcLW6AM3D8JeiwGmrp98JfpfWofnRhRx500GWjynFsO7KVs2GKGduRAU/GZtV/uosnHIFQGpwITWOOw5ziaf8Ubth7cqNJLqQS04wysbu6jZNDMeUVLHNCHl0O0hsuXloJE1INpOokUY8YDD4sq/IdOT9MY0nU8GbiREa0grS3W+/TCTKxjo5C5QBiUnU1bnkjEskAW/5Y8X1awil1k+TAqLAETORpbSP/1vlXkn2HoRRRHe2kF4PupxEugDA0iOxEe3AuHDjlK5GTQ==</X509Certificate><X509Certificate>MIIGBzCCA++gAwIBAgIKYRZoNAAAAAAAHDANBgkqhkiG9w0BAQUFADBfMRMwEQYKCZImiZPyLGQBGRYDY29tMRkwFwYKCZImiZPyLGQBGRYJbWljcm9zb2Z0MS0wKwYDVQQDEyRNaWNyb3NvZnQgUm9vdCBDZXJ0aWZpY2F0ZSBBdXRob3JpdHkwHhcNMDcwNDAzMTI1MzA5WhcNMjEwNDAzMTMwMzA5WjB3MQswCQYDVQQGEwJVUzETMBEGA1UECBMKV2FzaGluZ3RvbjEQMA4GA1UEBxMHUmVkbW9uZDEeMBwGA1UEChMVTWljcm9zb2Z0IENvcnBvcmF0aW9uMSEwHwYDVQQDExhNaWNyb3NvZnQgVGltZS1TdGFtcCBQQ0EwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCfoWyx39tIkip8ay4Z4b3i48WZUSNQrc7dGE4kD+7Rp9FMrXQwIBHrB9VUlRVJlBtCkq6YXDAm2gBr6Hu97IkHD/cOBJjwicwfyzMkh53y9GccLPx754gd6udOo6HBI1PKjfpFzwnQXq/QsEIEovmmbJNn1yjcRlOwhtDlKEYuJ6yGT1VSDOQDLPtqkJAwbofzWTCd+n7Wl7PoIZd++NIT8wi3U21StEWQn0gASkdmEScpZqiX5NMGgUqi+YSnEUcUCYKfhO1VeP4Bmh1QCIUAEDBG7bfeI0a7xC1Un68eeEExd8yb3zuDk6FhArUdDbH895uyAc4iS1T/+QXDwiALAgMBAAGjggGrMIIBpzAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBQjNPjZUkZwCu1A+3b7syuwwzWzDzALBgNVHQ8EBAMCAYYwEAYJKwYBBAGCNxUBBAMCAQAwgZgGA1UdIwSBkDCBjYAUDqyCYEBWJ5flJRP8KuEKU5VZ5KShY6RhMF8xEzARBgoJkiaJk/IsZAEZFgNjb20xGTAXBgoJkiaJk/IsZAEZFgltaWNyb3NvZnQxLTArBgNVBAMTJE1pY3Jvc29mdCBSb290IENlcnRpZmljYXRlIEF1dGhvcml0eYIQea0WoUqgpa1Mc1j0BxMuZTBQBgNVHR8ESTBHMEWgQ6BBhj9odHRwOi8vY3JsLm1pY3Jvc29mdC5jb20vcGtpL2NybC9wcm9kdWN0cy9taWNyb3NvZnRyb290Y2VydC5jcmwwVAYIKwYBBQUHAQEESDBGMEQGCCsGAQUFBzAChjhodHRwOi8vd3d3Lm1pY3Jvc29mdC5jb20vcGtpL2NlcnRzL01pY3Jvc29mdFJvb3RDZXJ0LmNydDATBgNVHSUEDDAKBggrBgEFBQcDCDANBgkqhkiG9w0BAQUFAAOCAgEAEJeKw1wDRDbd6bStd9vOeVFNAbEudHFbbQwTq86+e4+4LtQSooxtYrhXAstOIBNQmd16QOJXu69YmhzhHQGGrLt48ovQ7DsB7uK+jwoFyI1I4vBTFd1Pq5Lk541q1YDB5pTyBi+FA+mRKiQicPv2/OR4mS4N9wficLwYTp2OawpylbihOZxnLcVRDupiXD8WmIsgP+IHGjL5zDFKdjE9K3ILyOpwPf+FChPfwgphjvDXuBfrTot/xTUrXqO/67x9C0J71FNyIe4wyrt4ZVxbARcKFA7S2hSY9Ty5ZlizLS/n+YWGzFFW6J1wlGysOUzU9nm/qhh6YinvopspNAZ3GmLJPR5tH4LwC8csu89Ds+X57H2146SodDW4TsVxIxImdgs8UoxxWkZDFLyzs7BNZ8ifQv+AeSGAnhUwZuhCEl4ayJ4iIdBD6Svpu/RIzCzU2DKATCYqSCRfWupW76bemZ3KOm+9gSd0BhHudiG/m4LBJ1S2sWo9iaF2YbRuoROmv6pH8BJv/YoybLL+31HIjCPJZr2dHYcSZAI9La9Zj7jkIeW1sMpjtHhUBdRBLlCslLCleKuzoJZ1GtmShxN1Ii8yqAhuoFuMJb+g74TKIdbrHk/Jmu5J4PcBZW+JC33Iacjmbuqnl84xKf8OxVtc2E0bodj6L54/LlUWa8kTo/0=</X509Certificate></X509Data><CounterSignature ts-format="cms-timestamp-message" xmlns="http://schemas.microsoft.com/xmldsig/timestamp/2003">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</CounterSignature></Object></Signature></doc>
